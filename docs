@@ -1,1 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISHCS Brochure - AI-Powered Healthcare System</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap');
+        
+        :root {
+            --gold-primary: #FFD700;
+            --gold-dark: #D4AF37;
+            --gold-light: #FFECB3;
+            --tech-blue: #001F3F;
+            --tech-dark: #0A0A0A;
+            --tech-accent: #00BFFF;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .language-selector {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        #language-select {
+            background: var(--tech-dark);
+            color: var(--gold-light);
+            border: 1px solid var(--gold-primary);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .brochure {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+        
+        .panel {
+            background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            padding: 30px;
+            page-break-inside: avoid;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .panel::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold-primary), var(--gold-dark));
+        }
+        
+        .header-panel {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, var(--tech-dark), var(--tech-blue));
+            color: white;
+            text-align: center;
+            padding: 50px 30px;
+            border: 1px solid var(--gold-primary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-panel::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(255,215,0,0.1) 0%, transparent 40%);
+        }
+        
+        h1, h2, h3, h4 {
+            margin-top: 0;
+            color: var(--gold-primary);
+        }
+        
+        .header-panel h1, .header-panel h2 {
+            color: white;
+            text-shadow: 0 0 10px rgba(255,215,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+        
+        h2 {
+            font-size: 28px;
+            border-bottom: 2px solid var(--gold-primary);
+            padding-bottom: 12px;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        
+        h3 {
+            font-size: 22px;
+            color: var(--gold-light);
+            margin-bottom: 15px;
+        }
+        
+        p, li {
+            color: #e0e0e0;
+        }
+        
+        .feature-icon {
+            font-size: 48px;
+            color: var(--gold-primary);
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(255,215,0,0.4);
+        }
+        
+        .benefit-box {
+            background: rgba(0, 31, 63, 0.5);
+            border-left: 4px solid var(--gold-primary);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .benefit-box::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0,191,255,0.05), transparent);
+            z-index: 0;
+        }
+        
+        .stat-highlight {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--gold-primary);
+            display: block;
+            margin: 15px 0;
+            text-shadow: 0 0 10px rgba(255,215,0,0.3);
+        }
+        
+        .contact-info {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 16px;
+            color: var(--gold-light);
+        }
+        
+        ul {
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        li::before {
+            content: "•";
+            color: var(--gold-primary);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        
+        .tech-pattern {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0.05;
+            background-image: 
+                radial-gradient(circle at 25% 25%, var(--gold-primary) 0%, transparent 20%),
+                radial-gradient(circle at 75% 75%, var(--gold-primary) 0%, transparent 20%);
+            pointer-events: none;
+        }
+        
+        @media print {
+            body {
+                padding: 0;
+                background: none;
+            }
+            .panel {
+                box-shadow: none;
+                border: 1px solid var(--gold-primary);
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .language-selector {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-selector">
+        <select id="language-select">
+            <option value="en">English</option>
+            <option value="am">አማርኛ (Amharic)</option>
+            <option value="ar">العربية (Arabic)</option>
+            <option value="om">Afaan Oromoo (Oromic)</option>
+            <option value="fr">Français (French)</option>
+        </select>
+    </div>
 
+    <div class="brochure">
+        <!-- Cover Panel -->
+        <div class="panel header-panel">
+            <div class="tech-pattern"></div>
+            <h1 data-translate="title">ISHCS</h1>
+            <h2 data-translate="subtitle">INTEGRATED SMART HEALTHCARE SYSTEM</h2>
+            <p style="font-size: 18px; max-width: 800px; margin: 0 auto;" data-translate="tagline">AI-Powered Clinical Automation Platform with Advanced Nurse Assistance</p>
+        </div>
+        
+        <!-- About Panel -->
+        <div class="panel">
+            <div class="tech-pattern"></div>
+            <h2 data-translate="about-title">Next-Gen Patient Care</h2>
+            <p data-translate="about-text">ISHCS represents the convergence of artificial intelligence, real-time data analytics, and clinical workflow automation to revolutionize healthcare delivery.</p>
+            
+            <div class="benefit-box">
+                <h3 data-translate="metrics-title">Key Performance Metrics</h3>
+                <ul>
+                    <li data-translate="metric1"><strong>42-50%</strong> reduction in medication errors</li>
+                    <li data-translate="metric2"><strong>68%</strong> faster emergency response</li>
+                    <li data-translate="metric3"><strong>50-70%</strong> fewer hospital-acquired infections</li>
+                    <li data-translate="metric4"><strong>3.5 hours</strong> saved per nurse daily</li>
+                </ul>
+            </div>
+            
+            <p data-translate="about-end">Our neural network architecture continuously learns from clinical interactions to optimize care pathways and resource allocation.</p>
+        </div>
+        
+        <!-- Features Panel -->
+        <div class="panel">
+            <div class="tech-pattern"></div>
+            <h2 data-translate="features-title">Core Technologies</h2>
+            
+            <div class="feature-icon">🤖</div>
+            <h3 data-translate="feature1-title">Predictive AI Engine</h3>
+            <p data-translate="feature1-text">Deep learning algorithms analyze real-time vitals and historical data to anticipate clinical needs before they become critical.</p>
+            
+            <div class="feature-icon">👁️</div>
+            <h3 data-translate="feature2-title">Smart Monitoring</h3>
+            <p data-translate="feature2-text">IoT-enabled bedside devices feed data to our centralized neural network for comprehensive patient surveillance.</p>
+            
+            <div class="feature-icon">🎤</div>
+            <h3 data-translate="feature3-title">Voice Interface</h3>
+            <p data-translate="feature3-text">Natural language processing enables hands-free communication for patients and staff through secure voice commands.</p>
+            
+            <div class="feature-icon">📊</div>
+            <h3 data-translate="feature4-title">Data Analytics</h3>
+            <p data-translate="feature4-text">Blockchain-secured clinical data warehouse with real-time visualization dashboards for administrators.</p>
+        </div>
+        
+        <!-- How It Works Panel -->
+        <div class="panel">
+            <div class="tech-pattern"></div>
+            <h2 data-translate="architecture-title">System Architecture</h2>
+            
+            <h3 data-translate="step1-title">1. Data Acquisition</h3>
+            <p data-translate="step1-text">Multi-modal inputs from IoT devices, EHR systems, and staff interactions create a comprehensive patient profile.</p>
+            
+            <h3 data-translate="step2-title">2. AI Processing</h3>
+            <p data-translate="step2-text">Our proprietary neural networks analyze data streams to detect anomalies and predict clinical needs.</p>
+            
+            <h3 data-translate="step3-title">3. Smart Routing</h3>
+            <p data-translate="step3-text">Context-aware algorithms prioritize and route alerts to the most appropriate clinical staff.</p>
+            
+            <div class="benefit-box">
+                <span class="stat-highlight">28min → 9min</span>
+                <p data-translate="response-text">Average response time improvement across clinical trials</p>
+            </div>
+        </div>
+        
+        <!-- Clinical Benefits Panel -->
+        <div class="panel">
+            <div class="tech-pattern"></div>
+            <h2 data-translate="outcomes-title">Clinical Outcomes</h2>
+            
+            <h3 data-translate="safety-title">Medication Safety</h3>
+            <p><span class="stat-highlight" data-translate="safety-stat">42-50% fewer errors</span>
+            <span data-translate="safety-text">Machine learning cross-references prescriptions with patient history and current vitals.</span></p>
+            
+            <h3 data-translate="response-title">Critical Response</h3>
+            <p><span class="stat-highlight" data-translate="response-stat">35% lower mortality</span>
+            <span data-translate="response-text2">Predictive algorithms identify deterioration patterns before visible symptoms appear.</span></p>
+            
+            <h3 data-translate="infection-title">Infection Control</h3>
+            <p><span class="stat-highlight" data-translate="infection-stat">60% fewer UTIs</span>
+            <span data-translate="infection-text">Automated protocol enforcement for catheter care and patient positioning.</span></p>
+            
+            <h3 data-translate="chronic-title">Chronic Care</h3>
+            <p><span class="stat-highlight" data-translate="chronic-stat">35% better outcomes</span>
+            <span data-translate="chronic-text">Personalized care plans dynamically adjusted by AI based on real-time data.</span></p>
+        </div>
+        
+        <!-- Operational Benefits Panel -->
+        <div class="panel">
+            <div class="tech-pattern"></div>
+            <h2 data-translate="impact-title">Operational Impact</h2>
+            
+            <h3 data-translate="efficiency-title">Staff Efficiency</h3>
+            <p><span class="stat-highlight" data-translate="efficiency-stat">3.5 hours saved daily</span>
+            <span data-translate="efficiency-text">Automated documentation and optimized task routing through spatial algorithms.</span></p>
+            
+            <h3 data-translate="cost-title">Cost Reduction</h3>
+            <p><span class="stat-highlight" data-translate="cost-stat">$15,000 savings per patient</span>
+            <span data-translate="cost-text">Reduced length of stay and complication rates through predictive care.</span></p>
+            
+            <h3 data-translate="data-title">Data Intelligence</h3>
+            <p data-translate="data-text">Real-time operational analytics with machine learning insights for continuous improvement.</p>
+            
+            <h3 data-translate="scalable-title">Scalable Platform</h3>
+            <p data-translate="scalable-text">Modular architecture adaptable to any clinical environment from ICU to outpatient clinics.</p>
+        </div>
+        
+        <!-- Evidence Panel -->
+        <div class="panel">
+            <div class="tech-pattern"></div>
+            <h2 data-translate="validation-title">Clinical Validation</h2>
+            
+            <h3 data-translate="kenya-title">Kenya ICU Study (2023)</h3>
+            <ul>
+                <li data-translate="kenya1">22% reduction in mortality</li>
+                <li data-translate="kenya2">42% fewer medication errors</li>
+                <li data-translate="kenya3">68% faster response times</li>
+            </ul>
+            
+            <h3 data-translate="india-title">India Surgical Wards (2022)</h3>
+            <ul>
+                <li data-translate="india1">55% fewer HAIs</li>
+                <li data-translate="india2">3.7 day shorter stays</li>
+                <li data-translate="india3">20% less admin burden</li>
+            </ul>
+            
+            <h3 data-translate="ethiopia-title">Ethiopia Pilot (2024)</h3>
+            <ul>
+                <li data-translate="ethiopia1">18% higher nurse satisfaction</li>
+                <li data-translate="ethiopia2">92% patient approval</li>
+                <li data-translate="ethiopia3">Endorsed by Ministry of Health</li>
+            </ul>
+        </div>
+        
+        <!-- Contact Panel -->
+        <div class="panel header-panel" style="grid-column: 1 / -1;">
+            <div class="tech-pattern"></div>
+            <h2 data-translate="deploy-title">DEPLOY THE FUTURE OF HEALTHCARE</h2>
+            <p style="font-size: 20px; margin-bottom: 30px;" data-translate="roi-text">ISHCS delivers measurable ROI within 6-9 months while transforming patient outcomes</p>
+            
+            <div class="contact-info">
+                <p style="font-size: 18px;"><strong data-translate="company-name">RAJI TECHNOLOGY</strong></p>
+                <p style="font-size: 16px; color: var(--gold-light);" data-translate="contact-info">+251913395143 | Addis Ababa, Ethiopia</p>
+                <p style="margin-top: 20px;" data-translate="footer-text">Powered by AI • Secured by Blockchain • Validated by Clinical Research</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            'en': {
+                'title': 'ISHCS',
+                'subtitle': 'INTEGRATED SMART HEALTHCARE SYSTEM',
+                'tagline': 'AI-Powered Clinical Automation Platform with Advanced Nurse Assistance',
+                'about-title': 'Next-Gen Patient Care',
+                'about-text': 'ISHCS represents the convergence of artificial intelligence, real-time data analytics, and clinical workflow automation to revolutionize healthcare delivery.',
+                'metrics-title': 'Key Performance Metrics',
+                'metric1': '<strong>42-50%</strong> reduction in medication errors',
+                'metric2': '<strong>68%</strong> faster emergency response',
+                'metric3': '<strong>50-70%</strong> fewer hospital-acquired infections',
+                'metric4': '<strong>3.5 hours</strong> saved per nurse daily',
+                'about-end': 'Our neural network architecture continuously learns from clinical interactions to optimize care pathways and resource allocation.',
+                'features-title': 'Core Technologies',
+                'feature1-title': 'Predictive AI Engine',
+                'feature1-text': 'Deep learning algorithms analyze real-time vitals and historical data to anticipate clinical needs before they become critical.',
+                'feature2-title': 'Smart Monitoring',
+                'feature2-text': 'IoT-enabled bedside devices feed data to our centralized neural network for comprehensive patient surveillance.',
+                'feature3-title': 'Voice Interface',
+                'feature3-text': 'Natural language processing enables hands-free communication for patients and staff through secure voice commands.',
+                'feature4-title': 'Data Analytics',
+                'feature4-text': 'Blockchain-secured clinical data warehouse with real-time visualization dashboards for administrators.',
+                'architecture-title': 'System Architecture',
+                'step1-title': '1. Data Acquisition',
+                'step1-text': 'Multi-modal inputs from IoT devices, EHR systems, and staff interactions create a comprehensive patient profile.',
+                'step2-title': '2. AI Processing',
+                'step2-text': 'Our proprietary neural networks analyze data streams to detect anomalies and predict clinical needs.',
+                'step3-title': '3. Smart Routing',
+                'step3-text': 'Context-aware algorithms prioritize and route alerts to the most appropriate clinical staff.',
+                'response-text': 'Average response time improvement across clinical trials',
+                'outcomes-title': 'Clinical Outcomes',
+                'safety-title': 'Medication Safety',
+                'safety-stat': '42-50% fewer errors',
+                'safety-text': 'Machine learning cross-references prescriptions with patient history and current vitals.',
+                'response-title': 'Critical Response',
+                'response-stat': '35% lower mortality',
+                'response-text2': 'Predictive algorithms identify deterioration patterns before visible symptoms appear.',
+                'infection-title': 'Infection Control',
+                'infection-stat': '60% fewer UTIs',
+                'infection-text': 'Automated protocol enforcement for catheter care and patient positioning.',
+                'chronic-title': 'Chronic Care',
+                'chronic-stat': '35% better outcomes',
+                'chronic-text': 'Personalized care plans dynamically adjusted by AI based on real-time data.',
+                'impact-title': 'Operational Impact',
+                'efficiency-title': 'Staff Efficiency',
+                'efficiency-stat': '3.5 hours saved daily',
+                'efficiency-text': 'Automated documentation and optimized task routing through spatial algorithms.',
+                'cost-title': 'Cost Reduction',
+                'cost-stat': '$15,000 savings per patient',
+                'cost-text': 'Reduced length of stay and complication rates through predictive care.',
+                'data-title': 'Data Intelligence',
+                'data-text': 'Real-time operational analytics with machine learning insights for continuous improvement.',
+                'scalable-title': 'Scalable Platform',
+                'scalable-text': 'Modular architecture adaptable to any clinical environment from ICU to outpatient clinics.',
+                'validation-title': 'Clinical Validation',
+                'kenya-title': 'Kenya ICU Study (2023)',
+                'kenya1': '22% reduction in mortality',
+                'kenya2': '42% fewer medication errors',
+                'kenya3': '68% faster response times',
+                'india-title': 'India Surgical Wards (2022)',
+                'india1': '55% fewer HAIs',
+                'india2': '3.7 day shorter stays',
+                'india3': '20% less admin burden',
+                'ethiopia-title': 'Ethiopia Pilot (2024)',
+                'ethiopia1': '18% higher nurse satisfaction',
+                'ethiopia2': '92% patient approval',
+                'ethiopia3': 'Endorsed by Ministry of Health',
+                'deploy-title': 'DEPLOY THE FUTURE OF HEALTHCARE',
+                'roi-text': 'ISHCS delivers measurable ROI within 6-9 months while transforming patient outcomes',
+                'company-name': 'RAJI TECHNOLOGY',
+                'contact-info': '+251913395143 | Addis Ababa, Ethiopia',
+                'footer-text': 'Powered by AI • Secured by Blockchain • Validated by Clinical Research'
+            },
+            'am': {
+                'title': 'አይኤስኤችሲኤስ',
+                'subtitle': 'ብልህ የሆስፒታል ስርዓት',
+                'tagline': 'በ AI የሚመራ የክሊኒካዊ አውቶሜሽን መድረክ ከላቀ የነርስ ድጋፍ',
+                'about-title': 'የወደፊት የታካሚ እንክብካቤ',
+                'about-text': 'ISHCS የሰው ሰራሽ አስተውሎት፣ የቀጥታ ውሂብ ትንተና እና የክሊኒካዊ የስራ ፍሰት አውቶሜሽን የጤና አገልግሎትን ለማሻሻል የሚሰራ ስርዓት ነው።',
+                'metrics-title': 'ዋና የአፈጻጸም መለኪያዎች',
+                'metric1': '<strong>42-50%</strong> የመድሃኒት ስህተቶች መቀነስ',
+                'metric2': '<strong>68%</strong> ፈጣን የአደጋ ምላሽ',
+                'metric3': '<strong>50-70%</strong> በሆስፒታል ውስጥ የሚመጡ ኢንፌክሽኖች መቀነስ',
+                'metric4': '<strong>3.5 ሰዓታት</strong> በነርስ ቀን መቆጠብ',
+                'about-end': 'የእኛ የነርቭ ኔትወርክ አርክቴክቸር ከክሊኒካዊ ግንኙነቶች በመማር የእንክብካቤ መንገዶችን እና የሀብቶች አጠቃቀምን ያሻሽላል።',
+                'features-title': 'ዋና ቴክኖሎጂዎች',
+                'feature1-title': 'የቅድመ አስተውሎት AI',
+                'feature1-text': 'የጥልቀት ትምህርት ስልተ-ቀመሮች የቀጥታ የህይወት ምልክቶችን እና ታሪካዊ ውሂቦችን በመተንተን ክሊኒካዊ ፍላጎቶችን ከመስተጋብር በፊት ያስተንትናል።',
+                'feature2-title': 'ብልህ መከታተያ',
+                'feature2-text': 'የ IoT የሆኑ የአልጋ ዳር መሳሪያዎች ውሂብን ወደ ማዕከላዊ የነርቭ ኔትወርክ ያስተላልፋሉ ለሙሉ የታካሚ ቁጥጥር።',
+                'feature3-title': 'የድምፅ በይነገጽ',
+                'feature3-text': 'የተፈጥሮ ቋንቋ ሂደት ለታካሞች እና ለሰራተኞች የድምፅ ትዕዛዞችን በመጠቀም ያለ እጅ ግንኙነት ያስችላል።',
+                'feature4-title': 'የውሂብ ትንተና',
+                'feature4-text': 'ብሎክቼይን-የተጠበቀ የክሊኒካዊ ውሂብ መጋዘን ከቀጥታ የማየት ዳሽቦርዶች ለአስተዳዳሪዎች።',
+                'architecture-title': 'የስርዓት አርክቴክቸር',
+                'step1-title': '1. የውሂብ ስብሰባ',
+                'step1-text': 'ከ IoT መሳሪያዎች፣ EHR ስርዓቶች እና ከሰራተኞች ግንኙነቶች የሚመጡ ብዙ ዓይነት ግብዓቶች የታካሚ መግለጫ ይፈጥራሉ።',
+                'step2-title': '2. AI ማቀነባበር',
+                'step2-text': 'የእኛ የባለቤትነት የነርቭ ኔትወርክ ውሂብ ፍሰቶችን በመተንተን ያልተለመዱ ነገሮችን ያገኛል እና ክሊኒካዊ ፍላጎቶችን ያስተንትናል።',
+                'step3-title': '3. ብልህ መስተካከል',
+                'step3-text': 'የውስጥ የሆነ ስልተ-ቀመር ማንቂያዎችን ያስቀምጣል እና ለተስማሚው የክሊኒካዊ �ኪል ያስተላልፋል።',
+                'response-text': 'በክሊኒካዊ ሙከራዎች ውስጥ የምላሽ ጊዜ ማሻሻያ',
+                'outcomes-title': 'የክሊኒካዊ ውጤቶች',
+                'safety-title': 'የመድሃኒት ደህንነት',
+                'safety-stat': '42-50% ያነሱ ስህተቶች',
+                'safety-text': 'የማሽን ትምህርት የመድሃኒት አሰጣጥን ከታካሚ ታሪክ እና ከአሁኑ የህይወት ምልክቶች ጋር ያመሳስላል።',
+                'response-title': 'ወሳኝ ምላሽ',
+                'response-stat': '35% ያነሰ ሞት',
+                'response-text2': 'የቅድመ አስተውሎት ስልተ-ቀመሮች የመበላሸት ቅዠቶችን ከሚታዩ ምልክቶች በፊት ያገኛሉ።',
+                'infection-title': 'የኢንፌክሽን ቁጥጥር',
+                'infection-stat': '60% ያነሱ የሽንት ቱቦ ኢንፌክሽኖች',
+                'infection-text': 'ለካቴተር እንክብካቤ እና ለታካሚ አቀማመጥ የራስ-ሰር ፕሮቶኮል አስፈፃሚ።',
+                'chronic-title': 'የሥር የሰደደ በሽታ እንክብካቤ',
+                'chronic-stat': '35% የተሻለ ውጤት',
+                'chronic-text': 'በቀጥታ ውሂብ ላይ በመመስረት በ AI የሚቆጣጠር የግል የእንክብካቤ ዕቅዶች።',
+                'impact-title': 'የአሠራር ተጽእኖ',
+                'efficiency-title': 'የሰራተኛ ውጤታማነት',
+                'efficiency-stat': 'ቀን በ3.5 ሰዓታት መቆጠብ',
+                'efficiency-text': 'ራስ-ሰር ሰነድ እና የተመቻቸ የስራ መስመር በቦታ ስልተ-ቀመሮች።',
+                'cost-title': 'የወጪ ቁጠባ',
+                'cost-stat': 'በአንድ ታካሚ $15,000 ቁጠባ',
+                'cost-text': 'የቆይታ ጊዜ እና የችግሮች መጠን መቀነስ በቅድመ አስተውሎት እንክብካቤ።',
+                'data-title': 'የውሂብ አስተውሎት',
+                'data-text': 'በቀጥታ የአሠራር ትንተና ከማሽን ትምህርት ግንዛቤዎች ለቀጣይ ማሻሻያ።',
+                'scalable-title': 'ሊሰፋ የሚችል መድረክ',
+                'scalable-text': 'ሞዱላር አርክቴክቸር ከ ICU እስከ ከተማ ውጭ ክሊኒኮች ድረስ ለማንኛውም የክሊኒካዊ አካባቢ የሚስማማ።',
+                'validation-title': 'የክሊኒካዊ ማረጋገጫ',
+                'kenya-title': 'የኬንያ ICU ጥናት (2023)',
+                'kenya1': '22% የሞት መጠን መቀነስ',
+                'kenya2': '42% ያነሱ የመድሃኒት ስህተቶች',
+                'kenya3': '68% ፈጣን የምላሽ ጊዜ',
+                'india-title': 'የህንድ የቀዶ ጥገና ወርድ (2022)',
+                'india1': '55% ያነሱ የሆስፒታል ኢንፌክሽኖች',
+                'india2': '3.7 ቀን ያነሰ የቆይታ ጊዜ',
+                'india3': '20% ያነሰ የአስተዳደር ሸክም',
+                'ethiopia-title': 'የኢትዮጵያ ፕላይስ (2024)',
+                'ethiopia1': '18% ከፍተኛ የነርስ እርካታ',
+                'ethiopia2': '92% የታካሚ እርካታ',
+                'ethiopia3': 'በጤና ሚኒስቴር የተፈቀደ',
+                'deploy-title': 'የወደፊቱን የጤና አገልግሎት ይጀምሩ',
+                'roi-text': 'ISHCS በ6-9 ወራት ውስጥ የሚለካ የኢንቨስትመንት መመለስ ያመጣል የታካሚ ውጤቶችን በማሻሻል',
+                'company-name': 'ራጂ ቴክኖሎጂ',
+                'contact-info': '+251913395143 | አዲስ አበባ፣ ኢትዮጵያ',
+                'footer-text': 'በ AI የሚሰራ • በብሎክቼይን የተጠበቀ • በክሊኒካዊ ምርመራ የተረጋገጠ'
+            },
+            'ar': {
+                'title': 'نظام الرعاية الصحية الذكي المتكامل',
+                'subtitle': 'نظام الرعاية الصحية الذكي المتكامل',
+                'tagline': 'منصة الأتمتة السريرية المدعومة بالذكاء الاصطناعي مع مساعدة تمريضية متقدمة',
+                'about-title': 'رعاية المريض من الجيل التالي',
+                'about-text': 'يمثل ISHCS تقارب الذكاء الاصطناعي وتحليل البيانات في الوقت الحقيقي وأتمتة سير العمل السريري لإحداث ثورة في تقديم الرعاية الصحية.',
+                'metrics-title': 'مقاييس الأداء الرئيسية',
+                'metric1': '<strong>42-50%</strong> انخفاض في أخطاء الدواء',
+                'metric2': '<strong>68%</strong> استجابة أسرع للطوارئ',
+                'metric3': '<strong>50-70%</strong> عدوى أقل المكتسبة في المستشفى',
+                'metric4': '<strong>3.5 ساعات</strong> يتم توفيرها لكل ممرضة يوميًا',
+                'about-end': 'يتعلم هيكل الشبكة العصبية لدينا باستمرار من التفاعلات السريرية لتحسين مسارات الرعاية وتخصيص الموارد.',
+                'features-title': 'التقنيات الأساسية',
+                'feature1-title': 'محرك الذكاء الاصطناعي التنبؤي',
+                'feature1-text': 'تحلل خوارزميات التعلم العميق العلامات الحيوية في الوقت الفعلي والبيانات التاريخية للتنبؤ بالاحتياجات السريرية قبل أن تصبح حرجة.',
+                'feature2-title': 'المراقبة الذكية',
+                'feature2-text': 'تغذي الأجهزة السريرية المزودة بتقنية إنترنت الأشياء البيانات إلى شبكتنا العصبية المركزية لمراقبة المريض الشاملة.',
+                'feature3-title': 'واجهة الصوت',
+                'feature3-text': 'تمكن معالجة اللغة الطبيعية الاتصال بدون استخدام اليدين للمرضى والموظفين من خلال أوامر صوتية آمنة.',
+                'feature4-title': 'تحليل البيانات',
+                'feature4-text': 'مستودع البيانات السريرية المؤمن بتقنية البلوك تشين مع لوحات معلومات تصور في الوقت الحقيقي للمسؤولين.',
+                'architecture-title': 'هندسة النظام',
+                'step1-title': '1. جمع البيانات',
+                'step1-text': 'إنشاء ملف شامل للمريض من خلال مدخلات متعددة الوسائط من أجهزة إنترنت الأشياء وأنظمة السجلات الصحية الإلكترونية وتفاعلات الموظفين.',
+                'step2-title': '2. معالجة الذكاء الاصطناعي',
+                'step2-text': 'تحلل الشبكات العصبية الخاصة بنا تدفقات البيانات للكشف عن الحالات الشاذة والتنبؤ بالاحتياجات السريرية.',
+                'step3-title': '3. التوجيه الذكي',
+                'step3-text': 'تحدد الخوارزميات الواعية بالسياق الأولويات وتوجه التنبيهات إلى الموظفين السريريين الأكثر ملاءمة.',
+                'response-text': 'تحسن متوسط وقت الاستجابة عبر التجارب السريرية',
+                'outcomes-title': 'النتائج السريرية',
+                'safety-title': 'سلامة الدواء',
+                'safety-stat': '42-50% أخطاء أقل',
+                'safety-text': 'يتقاطع التعلم الآلي بين الوصفات الطبية مع تاريخ المريض والعلامات الحيوية الحالية.',
+                'response-title': 'الاستجابة الحرجة',
+                'response-stat': '35% انخفاض في الوفيات',
+                'response-text2': 'تحدد خوارزميات التنبؤ أنماط التدهور قبل ظهور الأعراض المرئية.',
+                'infection-title': 'مكافحة العدوى',
+                'infection-stat': '60% عدوى أقل في المسالك البولية',
+                'infection-text': 'فرض بروتوكول آلي لرعاية القسطرة ووضع المريض.',
+                'chronic-title': 'الرعاية المزمنة',
+                'chronic-stat': '35% نتائج أفضل',
+                'chronic-text': 'خطط رعاية شخصية يتم تعديلها ديناميكيًا بواسطة الذكاء الاصطناعي بناءً على البيانات في الوقت الفعلي.',
+                'impact-title': 'التأثير التشغيلي',
+                'efficiency-title': 'كفاءة الموظفين',
+                'efficiency-stat': '3.5 ساعات يتم توفيرها يوميًا',
+                'efficiency-text': 'التوثيق الآلي وتحسين توجيه المهام من خلال الخوارزميات المكانية.',
+                'cost-title': 'خفض التكاليف',
+                'cost-stat': '15,000 دولار توفير لكل مريض',
+                'cost-text': 'تقليل مدة الإقامة ومعدلات المضاعفات من خلال الرعاية التنبؤية.',
+                'data-title': 'ذكاء البيانات',
+                'data-text': 'تحليلات تشغيلية في الوقت الحقيقي مع رؤى التعلم الآلي للتحسين المستمر.',
+                'scalable-title': 'منصة قابلة للتطوير',
+                'scalable-text': 'هندسة معيارية قابلة للتكيف مع أي بيئة سريرية من العناية المركزة إلى العيادات الخارجية.',
+                'validation-title': 'التحقق السريري',
+                'kenya-title': 'دراسة العناية المركزة في كينيا (2023)',
+                'kenya1': '22% انخفاض في الوفيات',
+                'kenya2': '42% أخطاء أقل في الدواء',
+                'kenya3': '68% أوقات استجابة أسرع',
+                'india-title': 'أجنحة الجراحة في الهند (2022)',
+                'india1': '55% عدوى أقل في المستشفى',
+                'india2': '3.7 يوم إقامة أقصر',
+                'india3': '20% عبء إداري أقل',
+                'ethiopia-title': 'تجربة إثيوبيا (2024)',
+                'ethiopia1': '18% رضا أعلى للممرضات',
+                'ethiopia2': '92% موافقة المريض',
+                'ethiopia3': 'معتمد من وزارة الصحة',
+                'deploy-title': 'نشر مستقبل الرعاية الصحية',
+                'roi-text': 'يوفر ISHCS عائد استثمار قابل للقياس خلال 6-9 أشهر مع تحسين نتائج المرضى',
+                'company-name': 'تكنولوجيا راجي',
+                'contact-info': '+251913395143 | أديس أبابا، إثيوبيا',
+                'footer-text': 'مدعوم بالذكاء الاصطناعي • مؤمن بتقنية البلوك تشين • تم التحقق منه من خلال البحث السريري'
+            },
+            'om': {
+                'title': 'ISHCS',
+                'subtitle': 'SISTIIMA FAYYAA BEKEKAA WALITTI QABAME',
+                'tagline': 'Pilaatfoormii Otomeeshinii Yaalaa AIn Gargaaramte Kan Deeggarsa Naarsii Guddinaa Qabu',
+                'about-title': 'Kunuunsa Dhukkubsataa Geerii Itti Aanu',
+                'about-text': 'ISHCS walitti dhufeenya beekumsa namaa, qorannoo odeeffannoo yeroo hunda jiru, fi otomaashinii hojii yaalaa kanneen akka kunuunsa fayyaa kennuu jijjiiramuuf hojjetuudha.',
+                'metrics-title': 'Mallattoolee Hojii Gurguddoo',
+                'metric1': '<strong>42-50%</strong> hiriyummaa qorichaa',
+                'metric2': '<strong>68%</strong> deebii yeroo gabaabaa',
+                'metric3': '<strong>50-70%</strong> dhukkubni mana yaalaa irraa argamu xiqqaadha',
+                'metric4': '<strong>3.5 sa\'aatii</strong> naarsi tokkoof guyyaatti qusata',
+                'about-end': 'Ijaarsa keenya network neuralii barumsa walqunnamtii yaalaa irraa baratee karaa kunuunsaa fi qoodinsa qabeenyaa sirreessuudha.',
+                'features-title': 'Teknooloojiiwwan Gurguddoo',
+                'feature1-title': 'Engine AI Tilmaamaa',
+                'feature1-text': 'Algoritmoota barumsa gadi fagoo mallattoo jireenyaa yeroo hunda jiru fi odeeffannoo seenaa fudhatee fedhii yaalaa mirkaneessuuf dura tilmaama.',
+                'feature2-title': 'To\'annaa Beekaa',
+                'feature2-text': 'Qalbiwwan alaawwii IoTn gargaaramuun odeeffannoo network neuralii keenya giddu galaatti dabarsuun kunuunsa dhukkubsataa guutuu ta\'eef.',
+                'feature3-title': 'Mataa Duree Sagalee',
+                'feature3-text': 'Hojii afaan uumamaa sagaleen gargaarsa harka hin qabne dhukkubsattootaaf fi hojjettootaaf akka ta\'u godha.',
+                'feature4-title': 'Qorannoo Odeeffannoo',
+                'feature5-text': 'Saqaa odeeffannoo yaalaa blockchain qabsiifame kan paaneli agarsiisaa yeroo hunda jiru miseensonni hojii isaanii ilaalu.',
+                'architecture-title': 'Ijaarsa Sistiimaa',
+                'step1-title': '1. Qabsiisaa Odeeffannoo',
+                'step1-text': 'Qaamoleen IoT, sisteemota EHR, fi walqunnamtii hojjettoota irraa argamuun shaakala dhukkubsataa guutuu uumu.',
+                'step2-title': '2. Hojii AI',
+                'step2-text': 'Networkoota neuralii keenya odeeffannoo dhangalaasaa fudhatee jijjiirama dhukkubsataa tilmaama.',
+                'step3-title': '3. Deebisuu Beekaa',
+                'step3-text': 'Algoritmoonni beekumsa madda qabu akeekkachiisota qooduufi hojjettoota yaalaa sirrii ta\'anitti dabarsu.',
+                'response-text': 'Guddina yeroo deebii qorannoo yaalaa irratti',
+                'outcomes-title': 'Bu\'aa Yaalaa',
+                'safety-title': 'Nageenya Qorichaa',
+                'safety-stat': '42-50% dogoggora xiqqaadha',
+                'safety-text': 'Barumsa mashinii qorichaa seenaa dhukkubsataa fi mallattoo jireenyaa ammaa waliin walitti maku.',
+                'response-title': 'Deebii Jabaa',
+                'response-stat': '35% du\'a gadi buusuu',
+                'response-text2': 'Algoritmoonni tilmaamaa mallattoo jijjiiramaa mirkaneessuuf dura tilmaama.',
+                'infection-title': 'Duraa Dhorkaa Infekshinii',
+                'infection-stat': '60% UTI xiqqaadha',
+                'infection-text': 'Otomaashinii eegumsa kaateetaraa fi bakka dhukkubsataa jiru mirkaneessu.',
+                'chronic-title': 'Kunuunsa Dhukkuba Yeroo Dheeraa',
+                'chronic-stat': '35% bu\'aa caalaa',
+                'chronic-text': 'Karoora kunuunsa namaa to\'annaan AI yeroo hunda jiru irratti hundaa\'e.',
+                'impact-title': 'Dhiibbaa Hojii',
+                'efficiency-title': 'Hojii Cimaa',
+                'efficiency-stat': '3.5 sa\'aatii guyyaatti qusata',
+                'efficiency-text': 'Galmeessuu otomaatikee fi karaa hojii sirreeffamuu algoritmoota alaa fayyadamuun.',
+                'cost-title': 'Gatii Gadi Buusuu',
+                'cost-stat': '$15,000 dhukkubsataa tokkoof qusata',
+                'cost-text': 'Yeroo jiraachaa fi rakkoo xiqqeessuu kunuunsa tilmaamaa fayyadamuun.',
+                'data-title': 'Beekumsa Odeeffannoo',
+                'data-text': 'Qorannoo hojii yeroo hunda jiru barumsa mashinii fayyadamuun guddina itti fufiinsaa.',
+                'scalable-title': 'Pilaatfoormii Bal\'ina Qabu',
+                'scalable-text': 'Ijaarsa modulaarii kan ICU irraa kaasee mana yaalaa alaa hundaaf ta\'u danda\'u.',
+                'validation-title': 'Mirkaneessaa Yaalaa',
+                'kenya-title': 'Qorannoo ICU Keenyaa (2023)',
+                'kenya1': '22% du\'a gadi buusuu',
+                'kenya2': '42% dogoggora qorichaa xiqqaadha',
+                'kenya3': '68% yeroo deebii gabaabaa',
+                'india-title': 'Wardii Raawwii India (2022)',
+                'india1': '55% infekshinii mana yaalaa xiqqaadha',
+                'india2': '3.7 guyyaa gabaabaa',
+                'india3': '20% hojii bulchinsaa xiqqaadha',
+                'ethiopia-title': 'Pilaayiloota Itoophiyaa (2024)',
+                'ethiopia1': '18% gammachuu naarsii ol kaasuu',
+                'ethiopia2': '92% dhukkubsattoonni gammachuu agarsiisu',
+                'ethiopia3': 'Waa\'ee Ministeera Fayyaa mirkaneessaa',
+                'deploy-title': 'FURI FUTAARA KUNUUNSAA FAYYAA',
+                'roi-text': 'ISHCS guyyaa 6-9 keessatti galii argachuun bu\'aa dhukkubsataa jijjiira',
+                'company-name': 'RAJI TECHNOLOGY',
+                'contact-info': '+251913395143 | Finfinnee, Itoophiyaa',
+                'footer-text': 'AIin Hojjata • Blockchainin Eegama • Qorannoo Yaalaan Mirkanaa\'e'
+            },
+            'fr': {
+                'title': 'ISHCS',
+                'subtitle': 'SYSTÈME INTÉGRÉ DE SOINS DE SANTÉ INTELLIGENT',
+                'tagline': 'Plateforme d\'automatisation clinique alimentée par l\'IA avec assistance infirmière avancée',
+                'about-title': 'Soins aux patients nouvelle génération',
+                'about-text': 'ISHCS représente la convergence de l\'intelligence artificielle, de l\'analyse de données en temps réel et de l\'automatisation des flux de travail cliniques pour révolutionner la prestation des soins de santé.',
+                'metrics-title': 'Indicateurs clés de performance',
+                'metric1': '<strong>42-50%</strong> réduction des erreurs de médication',
+                'metric2': '<strong>68%</strong> réponse d\'urgence plus rapide',
+                'metric3': '<strong>50-70%</strong> infections nosocomiales en moins',
+                'metric4': '<strong>3.5 heures</strong> économisées par infirmière chaque jour',
+                'about-end': 'Notre architecture de réseau neuronal apprend continuellement des interactions cliniques pour optimiser les parcours de soins et l\'allocation des ressources.',
+                'features-title': 'Technologies clés',
+                'feature1-title': 'Moteur d\'IA prédictive',
+                'feature1-text': 'Les algorithmes d\'apprentissage profond analysent les signes vitaux en temps réel et les données historiques pour anticiper les besoins cliniques avant qu\'ils ne deviennent critiques.',
+                'feature2-title': 'Surveillance intelligente',
+                'feature2-text': 'Les appareils de chevet compatibles IoT alimentent notre réseau neuronal centralisé pour une surveillance complète des patients.',
+                'feature3-title': 'Interface vocale',
+                'feature3-text': 'Le traitement du langage naturel permet une communication mains libres pour les patients et le personnel grâce à des commandes vocales sécurisées.',
+                'feature4-title': 'Analyse de données',
+                'feature4-text': 'Entrepôt de données cliniques sécurisé par blockchain avec tableaux de bord de visualisation en temps réel pour les administrateurs.',
+                'architecture-title': 'Architecture du système',
+                'step1-title': '1. Acquisition de données',
+                'step1-text': 'Des entrées multimodales provenant d\'appareils IoT, de systèmes EHR et d\'interactions du personnel créent un profil patient complet.',
+                'step2-title': '2. Traitement par IA',
+                'step2-text': 'Nos réseaux neuronaux propriétaires analysent les flux de données pour détecter les anomalies et prédire les besoins cliniques.',
+                'step3-title': '3. Routage intelligent',
+                'step3-text': 'Des algorithmes conscients du contexte hiérarchisent et acheminent les alertes vers le personnel clinique le plus approprié.',
+                'response-text': 'Amélioration du temps de réponse moyen dans les essais cliniques',
+                'outcomes-title': 'Résultats cliniques',
+                'safety-title': 'Sécurité des médicaments',
+                'safety-stat': '42-50% d\'erreurs en moins',
+                'safety-text': 'Le machine learning croise les prescriptions avec les antécédents du patient et les signes vitaux actuels.',
+                'response-title': 'Réponse critique',
+                'response-stat': '35% de mortalité en moins',
+                'response-text2': 'Les algorithmes prédictifs identifient les schémas de détérioration avant l\'apparition de symptômes visibles.',
+                'infection-title': 'Contrôle des infections',
+                'infection-stat': '60% d\'infections urinaires en moins',
+                'infection-text': 'Application automatisée des protocoles pour les soins des cathéters et le positionnement des patients.',
+                'chronic-title': 'Soins chroniques',
+                'chronic-stat': '35% de meilleurs résultats',
+                'chronic-text': 'Plans de soins personnalisés ajustés dynamiquement par l\'IA en fonction des données en temps réel.',
+                'impact-title': 'Impact opérationnel',
+                'efficiency-title': 'Efficacité du personnel',
+                'efficiency-stat': '3.5 heures économisées par jour',
+                'efficiency-text': 'Documentation automatisée et optimisation du routage des tâches grâce à des algorithmes spatiaux.',
+                'cost-title': 'Réduction des coûts',
+                'cost-stat': '15 000$ économisés par patient',
+                'cost-text': 'Réduction de la durée de séjour et des taux de complications grâce aux soins prédictifs.',
+                'data-title': 'Intelligence des données',
+                'data-text': 'Analytique opérationnelle en temps réel avec des insights de machine learning pour l\'amélioration continue.',
+                'scalable-title': 'Plateforme évolutive',
+                'scalable-text': 'Architecture modulaire adaptable à tout environnement clinique, des soins intensifs aux cliniques externes.',
+                'validation-title': 'Validation clinique',
+                'kenya-title': 'Étude en soins intensifs au Kenya (2023)',
+                'kenya1': '22% de réduction de la mortalité',
+                'kenya2': '42% d\'erreurs médicamenteuses en moins',
+                'kenya3': '68% de temps de réponse plus rapide',
+                'india-title': 'Services chirurgicaux en Inde (2022)',
+                'india1': '55% d\'infections nosocomiales en moins',
+                'india2': '3.7 jours de séjour en moins',
+                'india3': '20% de charge administrative en moins',
+                'ethiopia-title': 'Projet pilote en Éthiopie (2024)',
+                'ethiopia1': '18% de satisfaction accrue du personnel infirmier',
+                'ethiopia2': '92% d\'approbation des patients',
+                'ethiopia3': 'Approuvé par le Ministère de la Santé',
+                'deploy-title': 'DÉPLOYEZ L\'AVENIR DES SOINS DE SANTÉ',
+                'roi-text': 'ISHCS offre un retour sur investissement mesurable en 6-9 mois tout en transformant les résultats des patients',
+                'company-name': 'RAJI TECHNOLOGY',
+                'contact-info': '+251913395143 | Addis-Abeba, Éthiopie',
+                'footer-text': 'Alimenté par l\'IA • Sécurisé par blockchain • Validé par la recherche clinique'
+            }
+        };
+
+        function updateContent(lang) {
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.value = translations[lang][key];
+                    } else {
+                        element.innerHTML = translations[lang][key];
+                    }
+                }
+            });
+            document.documentElement.lang = lang;
+        }
+
+        document.getElementById('language-select').addEventListener('change', function() {
+            updateContent(this.value);
+        });
+
+        // Initialize with default language
+        updateContent('en');
+    </script>
+</body>
+</html>
